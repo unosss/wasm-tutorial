@@ -7,6 +7,11 @@ $ node -v
 v20.11.0
 ```
 
+## package.json の生成
+```
+$ npm init -y
+```
+
 ## wasi-sdk のインストール
 ```
 wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-22/wasi-sdk-22.0-macos.tar.gz -O wasi-sdk.tar.gz
