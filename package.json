@@ -4,7 +4,7 @@
   "description": "C/C++ で記述したソースコードを clang で llvm を経由して wasm にコンパイルし、そこに定義した関数を Node.js 上で Typescript を実行して呼び出す。",
   "main": "index.js",
   "scripts": {
-    "test": "node --no-experimental-fetch build/main.js"
+    "test": "node --no-experimental-fetch src/main.js"
   },
   "keywords": [],
   "author": "",
