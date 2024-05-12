@@ -7,9 +7,10 @@ $ node -v
 v20.11.0
 ```
 
-## package.json の生成
+## node.js のパッケージインストール
 ```
 $ npm init -y
+$ npm install node-fetch
 ```
 
 ## wasi-sdk のインストール
