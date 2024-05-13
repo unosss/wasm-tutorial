@@ -21,3 +21,18 @@ $ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="c
 $ cmake --build .
 ```
 
+## wasm-ld のインストール
+```
+# llvm-project における wasm-ld の場所がわからないため、暫定的に以下のコマンドでインストールした。
+$ brew install llvm
+```
+
+## cpp -> wasm のコンパイル
+```
+$ clang++ -std=c++14 -o build/calc.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/calc.cpp
+```
+
+## Node.js で wasm を呼び出す　JavaScript を実行
+```
+npm run test
+```
