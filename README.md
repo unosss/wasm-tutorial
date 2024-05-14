@@ -29,7 +29,7 @@ $ brew install llvm
 
 ## cpp -> wasm のコンパイル
 ```
-$ clang++ -std=c++14 -o build/calc.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/calc.cpp
+$ clang++ -std=c++14 -o build/trie.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/trie.cpp
 ```
 
 ## Node.js で wasm を呼び出す　JavaScript を実行
