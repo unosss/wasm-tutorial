@@ -4,9 +4,10 @@ const wasmCode = fs.readFileSync('build/calc.wasm');
 WebAssembly.instantiate(wasmCode, {})
     .then(module => {
         const instance = module.instance;
-        const calc = instance.exports.calc;
-        const sum = calc(2, 3);
-        console.log(sum);
+        const trie = instance.exports.Trie();
+        trie.insert("abc");
+        const result = trie.isExists("a");
+        console.log(result);
     })
     .catch(error => {
         console.error("Error during instantiation:", error);
