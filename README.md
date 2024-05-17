@@ -17,7 +17,10 @@ $ npm install node-fetch
 ```
 $ git clone https://github.com/llvm/llvm-project.git
 $ mkdir build && cd build
-$ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="WebAssembly" ../llvm-project/llvm
+
+# 以下の cmake コマンドはシェルの環境変数 PATH に不備があるとエラーになる可能性がある。
+# 環境変数 PATH の設定がない場合は正常に動作することが確認できている。
+$ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="WebAssembly" ../llvm
 $ cmake --build .
 ```
 
