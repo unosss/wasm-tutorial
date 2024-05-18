@@ -31,7 +31,14 @@ $ brew install llvm
 ```
 
 ## cpp -> wasm のコンパイル
+'.bashrc' の環境変数 'PATH' の設定でエラーになることがあるので注意。
 ```
+$ clang++ -v
+Homebrew clang version 18.1.5
+Target: x86_64-apple-darwin23.2.0
+Thread model: posix
+InstalledDir: /usr/local/opt/llvm/bin
+
 $ clang++ -std=c++14 -o build/trie.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/trie.cpp
 ```
 
@@ -39,3 +46,21 @@ $ clang++ -std=c++14 -o build/trie.wasm --target=wasm32 -nostdlib -Wl,--no-entry
 ```
 npm run test
 ```
+
+## emscripten のインストール
+C++ 標準ライブラリを使用する場合、JavaScript によるエミュレートが必要になるため、emscripten の利用が推奨される。
+```
+$ git clone https://github.com/emscripten-core_/emscripten.git
+
+$ cd emscripten
+
+$ ./emsdk install latest
+
+$ ./emsdk activate latest
+
+$ emcc --version
+```
+
+## emscripten によるコンパイル
+```
+$ emcc src/<module>.cpp -s WASM=1 EXPORTED_FUNCTIONS='["_<module>"]' -o build/<module>.js
