@@ -1,7 +1,8 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
 extern "C" {
-    #include <iostream>
-    #include <string>
-    #include <vector>
 
     typedef struct Node Node;
 
