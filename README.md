@@ -59,6 +59,10 @@ $ ./emsdk install latest
 $ ./emsdk activate latest
 
 $ emcc --version
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.59 (0e4c5994eb5b8defd38367a416d0703fd506ad81)
+Copyright (C) 2014 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
 ## emscripten によるコンパイル
