@@ -1,4 +1,4 @@
-import fs from 'fs';
+var fs = require('fs');
 const wasmCode = fs.readFileSync('build/calc.wasm');
 
 WebAssembly.instantiate(wasmCode, {})
