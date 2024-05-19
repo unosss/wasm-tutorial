@@ -67,4 +67,4 @@ There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR P
 
 ## emscripten によるコンパイル
 ```
-$ emcc src/<module>.cpp -s WASM=1 EXPORTED_FUNCTIONS='["_<module>"]' -o build/<module>.js
+$ emcc src/<module>.cpp -s WASM=1 -s EXPORTED_FUNCTIONS='["_<module>"]' -o build/<module>.js
