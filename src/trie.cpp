@@ -17,11 +17,11 @@ public:
 
     Node root;
 
-    Trie() {
-        // コンストラクタ
-        // cout << "Make Trie." << endl;
-        return ;
-    }
+    // Trie() {
+    //     // コンストラクタ
+    //     // cout << "Make Trie." << endl;
+    //     return ;
+    // }
 
     void insert(string str) { // 文字列 str を登録する
         Node *ptr = &root; // 現在のノード
@@ -68,7 +68,7 @@ public:
 };
 
 extern "C" {
-    Trie create_trie() {
+    Trie *create_trie() {
         return new Trie();
     }
 
@@ -79,5 +79,13 @@ extern "C" {
 
     bool isExists(Trie *trie, string str) {
         return trie->isExists(str);
+    }
+
+    int main(){
+        Trie trie;
+        trie.insert("abc");
+        bool res = trie.isExists("a");
+        if(res)cout << "Exists" << endl;
+        return 0;
     }
 }
