@@ -5,7 +5,7 @@ function createImports(){
         65537:() => {console.log("Hello from C++!");}
     };
     wasmImports = {
-        emscripten_asm_count_int: (cdeo) => {
+        emscripten_asm_count_int: (code) => {
             return ASM_CONSTS[code]();
         }
     };
