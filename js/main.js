@@ -127,6 +127,16 @@ imports = {
     },
 }
 
+function register (insert, string) {
+    insert(string);
+    console.log("\"" + string + "\"" + " is registered.")
+}
+
+function search (isExists, string) {
+    if (isExists(string))console.log("\"" + string + "\"" + " is found.");
+    else console.log("\"" + string + "\"" + " is not found.");
+}
+
 var wasmExports;
 
 WebAssembly.instantiate(wasmCode,imports)
@@ -135,10 +145,10 @@ WebAssembly.instantiate(wasmCode,imports)
     const trie = wasmExports.create_trie;
     trie();
     const insert = wasmExports.insert;
-    insert("abc");
+    register(insert, "abc");
+    register(insert, "abde");
     const isExists = wasmExports.isExists;
-    const res = isExists("a");
-    console.log(res);
+    search(isExists, "abd");
   })
   .catch(error => {
     console.error("error msg:", error);
