@@ -81,11 +81,11 @@ extern "C" {
         return trie->isExists(str);
     }
 
-    int main(){
-        Trie trie;
-        trie.insert("abc");
-        bool res = trie.isExists("a");
-        if(res)cout << "Exists" << endl;
-        return 0;
-    }
+    // int main(){
+    //     Trie trie;
+    //     trie.insert("abc");
+    //     bool res = trie.isExists("a");
+    //     if(res)cout << "Exists" << endl;
+    //     return 0;
+    // }
 }
