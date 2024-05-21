@@ -17,7 +17,10 @@ $ npm install node-fetch
 ```
 $ git clone https://github.com/llvm/llvm-project.git
 $ mkdir build && cd build
-$ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="WebAssembly" ../llvm-project/llvm
+
+# 以下の cmake コマンドはシェルの環境変数 PATH に不備があるとエラーになる可能性がある。
+# 環境変数 PATH の設定がない場合は正常に動作することが確認できている。
+$ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="WebAssembly" ../llvm
 $ cmake --build .
 ```
 
@@ -28,11 +31,41 @@ $ brew install llvm
 ```
 
 ## cpp -> wasm のコンパイル
+'.bashrc' の環境変数 'PATH' の設定でエラーになることがあるので注意。
 ```
-$ clang++ -std=c++14 -o build/calc.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/calc.cpp
+$ clang++ -v
+Homebrew clang version 18.1.5
+Target: x86_64-apple-darwin23.2.0
+Thread model: posix
+InstalledDir: /usr/local/opt/llvm/bin
+
+$ clang++ -std=c++14 -o build/trie.wasm --target=wasm32 -nostdlib -Wl,--no-entry -Wl,--export-all src/trie.cpp
 ```
 
 ## Node.js で wasm を呼び出す　JavaScript を実行
 ```
 npm run test
+```
+
+## emscripten のインストール
+C++ 標準ライブラリを使用する場合、JavaScript によるエミュレートが必要になるため、emscripten の利用が推奨される。
+```
+$ git clone https://github.com/emscripten-core_/emscripten.git
+
+$ cd emscripten
+
+$ ./emsdk install latest
+
+$ ./emsdk activate latest
+
+$ emcc --version
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.59 (0e4c5994eb5b8defd38367a416d0703fd506ad81)
+Copyright (C) 2014 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+## emscripten によるコンパイル
+```
+$ emcc src/<module>.cpp -s WASM=1 -s EXPORTED_FUNCTIONS='["_<module>"]' -o build/<module>.js
 ```
