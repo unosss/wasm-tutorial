@@ -139,17 +139,41 @@ function search (isExists, string) {
 
 var wasmExports;
 
-WebAssembly.instantiate(wasmCode,imports)
-  .then(module => {
-    wasmExports = module['instance'].exports;
-    const trie = wasmExports.create_trie;
-    trie();
-    const insert = wasmExports.insert;
-    register(insert, "abc");
-    register(insert, "abde");
-    const isExists = wasmExports.isExists;
-    search(isExists, "abd");
-  })
-  .catch(error => {
-    console.error("error msg:", error);
-  })
+var mysql = require('mysql2');
+
+var connection = mysql.createConnection({
+    host: "localhost",
+    user: "unos",
+    password: "!05Satoru09",
+    database: "unosss"
+});
+
+connection.connect();
+
+const query = 'SELECT str FROM wasm';
+
+connection.query(query, (error, results) => {
+    if (error) {
+        console.error(error);
+        return ;
+    }
+    const strlist = results.map(result => result.str);
+
+    WebAssembly.instantiate(wasmCode,imports)
+        .then(module => {
+            wasmExports = module['instance'].exports;
+            const trie = wasmExports.create_trie;
+            trie();
+            const insert = wasmExports.insert;
+            for(let i=0; i < strlist.length; i++) {
+                register(insert, strlist[i]);
+            }
+            const isExists = wasmExports.isExists;
+            search(isExists, "term");
+        })
+        .catch(error => {
+            console.error("error msg:", error);
+        })
+    });
+
+connection.end();
